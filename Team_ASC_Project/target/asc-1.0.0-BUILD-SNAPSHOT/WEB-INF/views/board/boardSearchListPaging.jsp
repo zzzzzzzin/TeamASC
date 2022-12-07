@@ -108,7 +108,9 @@
 	.table-short-title {
 		text-align: center;
 	}
-	
+	.table-title>a {
+		display: block;
+	}
 }
 </style>
 

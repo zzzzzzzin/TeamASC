@@ -104,8 +104,9 @@
 		</tr>
 	</table>
 	</br></br>
-	<input class="button" type="submit" value="글쓰기">
 	
+	<input class="button" type="submit" value="글쓰기">
+	<br/><br/>
 	
 </form>
 </div>

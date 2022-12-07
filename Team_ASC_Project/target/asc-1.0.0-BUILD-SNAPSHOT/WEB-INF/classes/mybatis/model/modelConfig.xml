@@ -12,5 +12,12 @@
 		<typeAlias type="com.project.asc.vo.ScheduleVO" alias="scheduleVO"/>
 		<typeAlias type="com.project.asc.vo.BoardVO" alias="boardVO"/>
 		<typeAlias type="com.project.asc.vo.PageVO"  alias="pageVO" />
+		<typeAlias type="com.project.asc.vo.ProcessVO"  alias="processVO" />
+		<typeAlias type="com.project.asc.vo.MessageVO"  alias="messageVO" />
+		<typeAlias type="com.project.asc.vo.ReplyVO"  alias="replyVO" />
+		<typeAlias type="com.project.asc.vo.TaskVO"  alias="taskVO" />
+		<typeAlias type="com.project.asc.vo.WbsDetailVO"  alias="wbsDetailVO" />
+		<typeAlias type="com.project.asc.vo.TestVO"  alias="testVO" />
+		<typeAlias type="com.project.asc.vo.MinutesVO"  alias="minutesVO" />
 	</typeAliases>
 </configuration>

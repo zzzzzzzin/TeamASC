@@ -8,15 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-	h2 {
-		border-bottom: 2px solid black;
-	}
-</style>
+
 <title>메인</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/loginMain.css"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
 </head>
 
 <body>
@@ -50,12 +45,12 @@
    
    <tr>
       <td id="ongoingDiv">
-         <div style="margin-left:10px;margin-top:10px; width: 160px;">
-            <h2>진행 프로젝트</h2>
+         <div style="margin-left:10px;margin-top:10px;">
+            <h3>진행 프로젝트</h3>
          </div>
       </td>
    </tr>
-   <tr>
+   <%-- <tr>
       <td>
          <div style="margin-left:16px;margin-top:10px;">
             <h4>개인 프로젝트</h4>
@@ -106,11 +101,11 @@
             </h4>
          </div>
       </td>
-   </tr>
+   </tr> --%>
    <tr>
       <td colspan="4">
          <c:forEach var="project" items="${list}" varStatus="index">
-            <c:if test="${project.percentage ne 100  && project.teamCategory eq 'T' && project.finishYn eq 'N'}">
+            <c:if test="${project.percentage ne 100  && project.finishYn eq 'N'}">
                <div class="card" style="width: 16rem;height:180px;display: inline-block;margin-left: 10px;margin-top: 10px;border:1px solid #acacac;">
                     <div class="card-body">
                        <div class="projectNameDiv">프로젝트명</div>
@@ -145,12 +140,12 @@
    </tr>
    <tr>
       <td id="finishedDiv">
-         <div style="margin-left:10px;margin-top:10px;  width: 160px;">
-            <h2>완료 프로젝트</h2>
+         <div style="margin-left:10px;margin-top:10px;">
+            <h3>완료 프로젝트</h3>
          </div>
       </td>
    </tr>
-   <tr>
+   <%-- <tr>
       <td>
          <div style="margin-left:16px;margin-top:10px;">
             <h4>개인 프로젝트</h4>
@@ -196,11 +191,11 @@
             <h4>팀 프로젝트</h4>
          </div>
       </td>
-   </tr>
+   </tr> --%>
    <tr>
       <td colspan="4">
          <c:forEach var="project" items="${list}" varStatus="index">
-            <c:if test="${project.finishYn eq 'Y' && project.teamCategory eq 'T'}">
+            <c:if test="${project.percentage eq 100 && project.finishYn eq 'Y'}">
                <div class="card" style="width: 16rem;height:180px;display: inline-block;margin-left: 10px;margin-top: 10px;border:1px solid #acacac;">
                    <div class="card-body">
                       <div class="projectNameDiv">
@@ -232,12 +227,12 @@
    </tr>
    <tr>
       <td id="stoppedDiv">
-         <div style="margin-left:10px;margin-top:10px;  width: 160px;">
-            <h2>중단 프로젝트</h2>
+         <div style="margin-left:10px;margin-top:10px;">
+            <h3>중단 프로젝트</h3>
          </div>
       </td>
    </tr>
-   <tr>
+   <%-- <tr>
       <td>
          <div style="margin-left:16px;margin-top:10px;">
             <h4>개인 프로젝트</h4>
@@ -286,11 +281,11 @@
             <h4>팀 프로젝트</h4>
          </div>
       </td>
-   </tr>
+   </tr> --%>
    <tr>
       <td colspan="4">
          <c:forEach var="project" items="${list}" varStatus="index">
-            <c:if test="${project.finishYn eq 'S' && project.teamCategory eq 'T'}">
+            <c:if test="${project.finishYn eq 'S'}">
                <div class="card" style="width: 16rem;height:180px;display: inline-block;margin-left: 10px;margin-top: 10px;border:1px solid #acacac;">
                     <div class="card-body">
                        <div class="projectNameDiv">프로젝트명</div>

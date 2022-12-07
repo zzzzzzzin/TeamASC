@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.dashboard">
+<!-- <mapper namespace="mapper.dashboard">
 	<resultMap id="dashboardMap" type="dashboardVO">
 		<collection property="documentsList" javaType="java.util.ArrayList" resultMap="documentsMap"></collection>
 	</resultMap>
@@ -17,5 +17,137 @@
 		<![CDATA[
 			select documents_seq,project_seq,documents_name from documents;
 		]]>
-	</select>
+	</select> -->
+	
+<mapper namespace="mapper.dashboard">
+	 <resultMap id="taskMap" type="taskVO">
+	      <id property="taskSeq" column="task_seq"/>
+	      <result property="projectSeq" column="project_seq"/>
+	      <result property="step" column="step"/>
+	      <result property="userSeq" column="user_seq"/>
+	      <result property="percentage" column="percentage"/>
+	      <result property="endDate" column="end_date"/>
+	 </resultMap>
+	 
+	  <resultMap id="projectMap" type="projectVO">
+	      <id property="projectSeq" column="project_seq"/>
+	      <result property="endDate" column="end_date"/>
+	      <result property="dDay" column="d_day"/>
+	   </resultMap>
+
+ 
+ 
+<!-- 전체 진척률 -->
+   <select id="calculateAllProgressRate" parameterType="String" resultType="java.lang.Double">
+      <![CDATA[
+        select avg(percentage)
+        from task
+        where project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 단계별 진척률 -->
+   <select id="calculateStepProgressRate" parameterType="boardVO">
+      <![CDATA[
+        select avg(percentage)
+        from task
+        where step = #{step} 
+      	and project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 멤버별 진척률 -->
+   <select id="calculateUserProgressRate" parameterType="boardVO" resultType="java.lang.Double">
+      <![CDATA[
+        select avg(percentage)
+        from task
+        where user_seq = #{userSeq}
+        and project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 프로젝트 전체 task 수 -->
+   <select id="countAllTask" parameterType="String" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*) 
+		from task
+		where project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 멤버별 task -->
+   <select id="countUserTask" parameterType="boardVO" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*)
+        from task
+        where user_seq = #{userSeq}
+        and project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 전체 기능수 -->
+   <select id="countAllFunction" parameterType="String" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*)
+        from task
+        where step = '구현'
+        and project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- 완성 기능수 -->
+   <select id="countCompleteFunction" parameterType="String" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*)
+        from task
+        where step='구현'
+        and project_seq = #{projectSeq}
+        and percentage = 100 
+      ]]>
+   </select>
+   
+<!-- 멤버별 전체 기능수 -->
+   <select id="countUserAllFunction" parameterType="boardVO" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*)
+        from task
+        where step = '구현'
+        and project_seq = #{projectSeq}
+        and user_seq = #{userSeq}
+      ]]>
+   </select>
+   
+<!-- 멤버별 완성 기능수 -->
+   <select id="countUserCompleteFunction" parameterType="boardVO" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*)
+        from task
+        where step='구현'
+        and project_seq = #{projectSeq}
+        and percentage = 100 
+        and user_seq = #{userSeq}
+      ]]>
+   </select>
+   
+<!-- delay task -->
+   <select id="countDelayTask" parameterType="String" resultType="java.lang.Integer">
+      <![CDATA[
+        select count(*) from task
+		where percentage not in (100)
+		and end_date < (curdate() + 0)
+		and project_seq = #{projectSeq}
+      ]]>
+   </select>
+   
+<!-- d-day -->
+   <select id="calculateDDay" parameterType="projectVO" resultType="java.lang.String">
+      <![CDATA[
+        select datediff(date(#{endDate}),curdate()+0) as d_day 
+		from project
+		where project_seq = #{projectSeq}
+			and end_date = #{endDate}
+      ]]>
+   </select>
+
+
 </mapper>

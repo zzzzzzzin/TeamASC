@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,26 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	console.log('ready');
+	
+	$("#typePositionGroup").change(function(){
+		document.getElementById("textPositionGroup").value = document.getElementById("typePositionGroup").value;
+	});
+	
+	$("#selectPositionGroup").change(function(){
+		document.getElementById("textPositionGroup").value = $("#selectPositionGroup option:selected").val();
+	});
+	
+	$(".table-title-radio").change(function(){
+		document.getElementById("textPositionGroup").value = "";
+		let position = $(".table-title-radio").val();
+		if($(".table-title-radio:checked").val() == "manager"){
+			$("#clickManager").show();
+			$("#clickUser").hide();
+		} else{
+			$("#clickManager").hide();
+			$("#clickUser").show();
+		}
+	});
 	
 	$("#checkId").on("click",function(){ //중복 체크 기능
 		let id = document.getElementById("userId").value;
@@ -116,7 +137,18 @@ $(document).ready(function(){
 		let checkPwdYn = document.getElementById("checkPwdYn").value;
 		let checkEmailYn = document.getElementById("checkEmailYn").value;
 		let checkPhoneNumYn = document.getElementById("checkPhoneNumYn").value;
+		let textPositionGroup = document.getElementById("textPositionGroup").value;
 		let userName = document.getElementById("userName");
+
+		if(!$('.table-title-radio').is(':checked')){
+			alert("포지션을 선택을 먼저 해주세요");
+			return false;
+		} 
+		
+		if(textPositionGroup == "none" || textPositionGroup == ""){
+			alert("소속을 입력해 주세요");
+			return false;
+		}
 		
         if(checkIdYn != "Y"){
         	alert("아이디 중복 체크를 먼저 해주세요");
@@ -243,6 +275,25 @@ $(document).ready(function(){
 		width: 98%;
 		font-size: 16px;
 	}
+	.table-title-radio {
+		height:30px;
+		font-weight: bold;
+		width: 50px;
+		font-size: 18px;
+		vertical-align:3px;
+	}
+	.table-title-position {
+		height:30px;
+		font-weight: bold;
+		width: 95%;
+		font-size: 15px;
+		vertical-align:3px;
+	}
+	.labelPostion{
+		position: relative;
+		top:-10px;
+		padding-right:20px;
+	}
 	.table-title {
 		width: 150px;
 	}
@@ -258,11 +309,29 @@ $(document).ready(function(){
 <input type="hidden" id="checkPwdYn" value="N">
 <input type="hidden" id="checkEmailYn" value="N">
 <input type="hidden" id="checkPhoneNumYn" value="N">
-
+<input type="hidden" id="textPositionGroup" value="" name="positionGroup" >
 
 <table class="table">
 	<tr>
 		<th class="join" colspan="3">회원가입</th>
+	</tr>
+	<tr>
+		<td class="table-title">유형</td>
+		<td>
+			<input class="table-title-radio" type="radio" name="position" value="user"><label class="labelPostion">유저</label>
+			<input class="table-title-radio" type="radio" name="position" value="manager"><label class="labelPostion">관리자</label>
+		</td>
+		<td>
+			<div id="clickManager" style="display:none;">
+				<input class="table-title-position"  type="text" placeholder="소속을 입력해주세요" id ="typePositionGroup">
+			</div>
+			<div id="clickUser" style="display:none;">
+				<select class="table-title-position"  id="selectPositionGroup">
+   					<option value="none">소속을 선택해주세요</option>
+     				<c:forEach var="list" items="${list}"><option value="${list}">${list}</option></c:forEach>
+ 				</select>
+			</div>
+		</td>
 	</tr>
 	<tr>
 		<td class="table-title">아이디</td>

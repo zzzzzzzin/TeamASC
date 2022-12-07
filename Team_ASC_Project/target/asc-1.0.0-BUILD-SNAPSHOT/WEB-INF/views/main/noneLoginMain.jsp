@@ -10,7 +10,6 @@
 		<meta charset="UTF-8">
 		<title>비로그인 메인</title>
 		<style type="text/css">
-			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap');
 			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap');
 	
 			.btnDiv {
@@ -37,6 +36,7 @@
 				font-family: 'Noto Sans KR', sans-serif;
 				color: #80F2E7;
 				font-size: 110px;
+				font-weight: 900;
 			}
 			.newB {
 				margin-top: 50px;
@@ -51,20 +51,12 @@
 				padding: 0 15px;
 				font-size: 20px;
 				font-family: 'Noto Sans KR', sans-serif;
+				font-weight: 400;
 			}
 	      	.nMain {
 	      		width: 65%;
 	      		height: 500px;
 	      	}
-			.button {
-				color:white;
-				padding: 7px 20px;
-				font-weight: bold;
-				background-color: #384D59;
-				border-radius:5px;
-				border:0;
-				font-size: 25px;
-			}
 		</style>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
@@ -90,7 +82,7 @@
 					<font>your Idea</font>
 				</div>
 				<div class="newB">
-					<a class="a-font" href="${contextPath}/user/viewLoginBeforeProject"><button class="newBtn button">프로젝트 생성</button></a>
+					<a class="a-font" href="${contextPath}/user/viewLoginBeforeProject"><button class="newBtn">프로젝트 생성</button></a>
 	      		</div>
 			</div>
 			<div class="imgDiv">
