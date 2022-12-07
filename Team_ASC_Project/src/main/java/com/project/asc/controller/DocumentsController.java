@@ -131,8 +131,8 @@ public class DocumentsController {
 				UUID uuid = UUID.randomUUID();
 				
 				fileName = uuid + "." + ext;
-				uploadFile.transferTo(new File("C:\\upload\\" + fileName));
-//				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
+//				uploadFile.transferTo(new File("C:\\upload\\" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
 			} 
 			vo.setFileName(fileName != null ? fileName : "");
 			vo.setRealFileName(fileName != null ? originalFileName : "");
@@ -144,8 +144,8 @@ public class DocumentsController {
 				//UUID 구하기
 				UUID uuid = UUID.randomUUID();
 				fileName = uuid + "." + ext;
-				uploadFile.transferTo(new File("C:\\upload\\" + fileName));
-//				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
+//				uploadFile.transferTo(new File("C:\\upload\\" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
 				
 				
 				vo.setFileName(fileName == oldFile ? oldFile : fileName);
@@ -182,14 +182,14 @@ public class DocumentsController {
 	        //파일 인코딩
 	        if (browser.contains("MSIE") || browser.contains("Trident")
 	                || browser.contains("Chrome")) {
-	            fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+",
-	                    "%20");
-	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("\\+",
-	                    "%20");
-//	        	filename = URLEncoder.encode(filename, "UTF-8").replaceAll("/+",
+//	            fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+",
 //	                    "%20");
-//	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("/+",
+//	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("\\+",
 //	                    "%20");
+	        	fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("/+",
+	                    "%20");
+	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("/+",
+	                    "%20");
 	        } else {
 	            fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
 	            originalFileName = new String(originalFileName.getBytes("UTF-8"), "ISO-8859-1");
@@ -197,8 +197,8 @@ public class DocumentsController {
 	    } catch (UnsupportedEncodingException ex) {
 	        System.out.println("UnsupportedEncodingException");
 	    }
-	    realFilename = "C:\\upload\\" + fileName;
-//	    realFilename = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + filename;
+//	    realFilename = "C:\\upload\\" + fileName;
+	    realFilename = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName;
 	    System.out.println(realFilename);
 	    File file1 = new File(realFilename);
 	    if (!file1.exists()) {

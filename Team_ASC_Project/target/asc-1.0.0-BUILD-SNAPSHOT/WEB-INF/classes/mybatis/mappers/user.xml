@@ -18,12 +18,14 @@
       <result property="startRowNum" column="start_row_num"/>
       <result property="viewRows" column="view_rows"/>
       <result property="keyword" column="keyword"/>
+      <result property="position" column="position"/>
+      <result property="positionGroup" column="position_group"/>
    </resultMap>
 
    <select id="createUser" parameterType="userVO">
       <![CDATA[
-        insert into user(id,pwd,name,email,phone_num,status,git_link) 
-        values (#{id},#{pwd},#{name},#{email},#{phoneNum},'Y',#{gitLink})
+        insert into user(id,pwd,name,email,phone_num,status,git_link,position,position_group) 
+        values (#{id},#{pwd},#{name},#{email},#{phoneNum},'Y',#{gitLink},#{position},#{positionGroup})
       ]]>
    </select>
    
@@ -283,8 +285,20 @@
 						              from team_member 
 						             where team_id in (select team_id from project where project_seq = #{projectSeq})) 
                and id != 'admin'
+               and position_group = #{positionGroup}
+               and position = 'user'
                and status ='Y';
 		]]>
 	</select>
 	
+	<!-- 포지션 그룹 리스트 -->
+	<select id="selectPositionGroup" resultMap="userMap" resultType="userVO">
+		<![CDATA[
+             select position_group 
+               from user
+              where status = 'Y' 
+                and id != 'admin'
+           group by position_group;
+		]]>
+	</select>
 </mapper>

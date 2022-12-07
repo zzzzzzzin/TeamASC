@@ -69,10 +69,11 @@
 		width: 98%;
 		font-size: 16px;
 	}
-	.table-content input {
+	.table-content textarea {
 		height: 96%;
 		width: 98%;
 		font-size: 16px;
+		resize:none;
 	}
 	.text-deco {
 		text-decoration : none;
@@ -96,7 +97,10 @@
 			<td class="table-title">제목</td><td class="text-padding table-title-text" colspan="5"><input type="text" name="boardTitle" value="${board.boardTitle}"></td>
 		</tr>
 		<tr>
-			<td class="table-title">내용</td><td class="text-padding table-content" colspan="5"><input type="text" name="boardContent" value="${board.boardContent }"></td>
+			<td class="table-title">내용</td>
+			<td class="text-padding table-content" colspan="5">
+				<textarea type="text" name="boardContent" value="${board.boardContent }">${board.boardContent }</textarea>
+			</td>
 		</tr>
 		<tr>
 			<td class="table-title">첨부파일</td>
@@ -125,5 +129,6 @@
 	
 </form>
 </div>
+
 </body>
 </html>

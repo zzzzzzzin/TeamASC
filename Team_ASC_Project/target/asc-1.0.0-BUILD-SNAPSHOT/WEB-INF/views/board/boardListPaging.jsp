@@ -107,6 +107,9 @@
 		padding-left: 15px;
 		padding-right: 15px;
 	}
+	.table-title>a {
+		display: block;
+	}
 
 }
 </style>

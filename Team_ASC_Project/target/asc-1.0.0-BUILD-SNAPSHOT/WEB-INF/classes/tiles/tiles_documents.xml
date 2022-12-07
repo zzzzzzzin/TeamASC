@@ -11,7 +11,47 @@
       <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
    </definition>
    
-   <definition name="/main" extends="baseLayout">
+   <definition name="/documents/readDocuments" extends="baseLayout">
+      <put-attribute name="title" value="문서 목록" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/documentsList.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
+   </definition>
+   
+   <definition name="/documents/createDocument" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/documentsList.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
+   </definition>
+   
+   <definition name="/documents/viewUpdateDocument" extends="baseLayout">
+      <put-attribute name="title" value="문서 수정" />
+      <put-attribute name="header" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/viewUpdateDocument.jsp" />
+      <put-attribute name="side" value=""/> 
+      <put-attribute name="footer" value="" />
+   </definition>
+   
+   <definition name="/documents/updateDocument" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/reloadPage.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
+   </definition>
+   
+   <definition name="/documents/uploadFile" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/documentsList.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
+   </definition>
+   
+   <definition name="/documents/deleteDocument" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/documents/documentsList.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
+   </definition>
+   
+   
+   
+   <!-- <definition name="/main" extends="baseLayout">
    	<put-attribute name="title" value="mainPage"/>
    	<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
    </definition>
@@ -44,5 +84,5 @@
       <put-attribute name="body" value="/WEB-INF/views/documents/examplePlan.jsp" />
       <put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp"/> 
    </definition>
-	
+ -->	
 </tiles-definitions>

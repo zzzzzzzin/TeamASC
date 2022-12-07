@@ -147,6 +147,11 @@
 				</c:choose>			
 				<c:choose>
 					<c:when test="${isLogon == true && member != null}">
+						<c:if test="${member.unReadingMessageYn eq 'Y'}">
+							❗
+						</c:if>
+						<a href="${contextPath}/message/messageList?pageNum=1">메세지</a>
+						<span>|</span>
 						<a href="${contextPath}/user/logout">로그아웃</a>
 						<span>|</span>
 						<a href="${contextPath}/user/viewMyPage?id=${member.id}">마이페이지</a>

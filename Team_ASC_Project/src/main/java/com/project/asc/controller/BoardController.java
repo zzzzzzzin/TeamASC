@@ -145,8 +145,8 @@ public class BoardController {
 			UUID uuid = UUID.randomUUID();
 			
 			fileName = uuid + "." + ext;
-			uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
-//			uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
+//			uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
+			uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
 		} 
 		board.setFileName(fileName != null ? fileName : "");
 		board.setRealFileName(fileName != null ? originalFileName : "");
@@ -205,8 +205,8 @@ public class BoardController {
 				UUID uuid = UUID.randomUUID();
 				
 				fileName = uuid + "." + ext;
-				uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
-//				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
+//				uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
 			} 
 			board.setFileName(fileName != null ? fileName : "");
 			board.setRealFileName(fileName != null ? originalFileName : "");
@@ -218,8 +218,8 @@ public class BoardController {
 				//UUID 구하기
 				UUID uuid = UUID.randomUUID();
 				fileName = uuid + "." + ext;
-				uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
-//				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
+//				uploadFile.transferTo(new File("C:\\dev\\file\\" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + fileName));
 				
 				
 				board.setFileName(fileName == oldFile ? oldFile : fileName);
@@ -242,8 +242,8 @@ public class BoardController {
 	 @RequestMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
 	 public @ResponseBody byte[] getImage(@RequestParam("fileName") String fileName) throws IOException {
 		Map<String, Object> param = new HashMap<String, Object>();
-		String filePath = "C:\\dev\\file\\";
-//		String filePath = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/";
+//		String filePath = "C:\\dev\\file\\";
+		String filePath = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/";
 		String res = filePath + fileName ;
 		InputStream in = new FileInputStream(res);
 		return IOUtils.toByteArray(in);
@@ -342,14 +342,14 @@ public class BoardController {
 	        //파일 인코딩
 	        if (browser.contains("MSIE") || browser.contains("Trident")
 	                || browser.contains("Chrome")) {
-	            filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+",
-	                    "%20");
-	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("\\+",
-	                    "%20");
-//	        	filename = URLEncoder.encode(filename, "UTF-8").replaceAll("/+",
+//	            filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+",
 //	                    "%20");
-//	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("/+",
+//	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("\\+",
 //	                    "%20");
+	        	filename = URLEncoder.encode(filename, "UTF-8").replaceAll("/+",
+	                    "%20");
+	            originalFileName = URLEncoder.encode(originalFileName, "UTF-8").replaceAll("/+",
+	                    "%20");
 	        } else {
 	            filename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
 	            originalFileName = new String(originalFileName.getBytes("UTF-8"), "ISO-8859-1");
@@ -357,8 +357,8 @@ public class BoardController {
 	    } catch (UnsupportedEncodingException ex) {
 	        System.out.println("UnsupportedEncodingException");
 	    }
-	    realFilename = "C:\\dev\\file\\" + filename;
-//	    realFilename = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + filename;
+//	    realFilename = "C:\\dev\\file\\" + filename;
+	    realFilename = "/var/lib/tomcat9/webapps/ROOT/dev/downloads/" + filename;
 	    System.out.println(realFilename);
 	    File file1 = new File(realFilename);
 	    if (!file1.exists()) {

@@ -14,6 +14,8 @@
       <result property="createDate" column="create_date"/>
       <result property="teamLeaderSeq" column="team_leader_seq"/>
       <result property="teamCategory" column="team_category"/>
+      <result property="startDate" column="start_date"/>
+      <result property="endDate" column="end_date"/>
    </resultMap>
 
    <select id="checkProjectName" resultType="int" parameterType="String">
@@ -33,21 +35,23 @@
       ]]>
 	</select>
 	
+	<select id="modifyProjectDate" parameterType="projectVO">
+      <![CDATA[
+        update project
+       	   set start_date = #{startDate},
+       	   	   end_date = #{endDate},
+       	       update_time = now()
+       	 where project_seq = #{projectSeq}
+      ]]>
+	</select>
+	
 	<select id="createProject" parameterType="projectVO">
       <![CDATA[
-        insert into project(project_name,team_id) 
-        values (#{projectName},#{teamId})
+        insert into project(project_name,team_id,start_date,end_date) 
+        values (#{projectName},#{teamId},#{startDate},#{endDate})
       ]]>
    </select>
    
-   <select id="selectProjectSeqNoDocuments" resultMap="projectMap" resultType="projectVO" parameterType="java.lang.Integer">
-      <![CDATA[
-        select project_seq
-  		  from project
- 		 where team_id in (select team_id from team_member where user_seq = #{userSeq}) 
-   		   and project_seq not in (select project_seq from documents)
-      ]]>
-	</select>
    
    <select id="selectProjectList" resultMap="projectMap" resultType="projectVO" parameterType="java.lang.Integer">
       <![CDATA[
@@ -66,7 +70,7 @@
 	
 	<select id="selectProjectOne" resultMap="projectMap" resultType="projectVO" parameterType="java.lang.Integer">
       <![CDATA[
-        select a.project_seq,a.team_id,a.project_name,a.finish_yn,a.percentage,a.create_date,b.user_seq as team_leader_seq,b.team_category as team_category
+        select a.project_seq,a.team_id,a.project_name,a.finish_yn,a.percentage,a.create_date,a.start_date,a.end_date,b.user_seq as team_leader_seq,b.team_category as team_category
  	      from project a left outer join team_member b on a.team_id = b.team_id and b.team_leader = 'Y'
          where a.project_seq = #{projectSeq}
       ]]>
@@ -89,4 +93,5 @@
  		 where team_id not in(select team_id from team_member);
       ]]>
 	</select>
+	
 </mapper>
