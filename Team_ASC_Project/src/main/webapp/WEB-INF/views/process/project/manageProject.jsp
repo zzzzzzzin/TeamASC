@@ -72,7 +72,7 @@ input[type=submit]{
     font-weight: bold;
 }
 button{
-    color: white;
+   color: white;
     background-color: #384D59;
     border: 0;
     padding: 5px;
@@ -90,7 +90,8 @@ button{
    color: white;
    background-color: #384D59;
 }
-.btnClick {
+
+.btnClick{
    width: 100px; 
    height: 40px; 
    border: 0px;
@@ -100,10 +101,61 @@ button{
    text-align: center;
    color: white;
    background-color: #384D59;
-   float: left;
+}
+#startDate{
+	float:left;
+	width:48.5%;
+	margin-right:3px;
+}
+#endDate{
+	float:right;
+	width:48.5%;
+	margin-left:3px;
+}
+.processNav>ul {
+	list-style: none;
+	display: inline-block;
+	width: 95%;
+	height: 100px;
+	text-align: center;
+}
+.processNav>ul>li {
+	float: left;
+}
+.processNav>ul>li>a {
+	border: 2px solid white;
+	background-color: #F1F3F5;
+	color: #384D59;
+	text-decoration: none;
+	font-size: 20px;
+	display: block;
+	width: 130px;
+	padding: 30px 30px;
+}
+.processNav>ul>li>a:hover {
+	border: 5px solid #0F2859;
+	background-color: white;
+	color: #384D59;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	width: 130px;
+	padding: 30px 30px;
+}
+.processNav .li1>a {
+	border: 5px solid #0F2859;
+	background-color: white;
+	color: #384D59;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	width: 130px;
+	padding: 30px 30px;
 }
 .processBtn {
-   width: 100px; 
+    width: 100px; 
     height: 40px; 
     border: 0px;
     border-radius: 5px; 
@@ -115,68 +167,14 @@ button{
     float: right;
     margin-right: 10%;
 }
-.btnClick, .processBtn {
-   margin-top: 30px;
-   margin-bottom: 60px;
-}
-#startDate{
-   float:left;
-   width:48.5%;
-   margin-right:3px;
-}
-#endDate{
-   float:right;
-   width:48.5%;
-   margin-left:3px;
-}
-.processNav>ul {
-   list-style: none;
-   display: inline-block;
-   width: 95%;
-   height: 100px;
-   text-align: center;
-}
-.processNav>ul>li {
-   float: left;
-}
-.processNav>ul>li>a {
-   border: 2px solid white;
-   background-color: #F1F3F5;
-   color: #384D59;
-   text-decoration: none;
-   font-size: 20px;
-   display: block;
-   width: 130px;
-   padding: 30px 30px;
-}
-.processNav>ul>li>a:hover {
-   border: 5px solid #0F2859;
-   background-color: white;
-   color: #384D59;
-   text-decoration: none;
-   font-size: 20px;
-   font-weight: bold;
-   display: block;
-   width: 130px;
-   padding: 30px 30px;
-}
-.processNav .li1>a {
-   border: 5px solid #0F2859;
-   background-color: white;
-   color: #384D59;
-   text-decoration: none;
-   font-size: 20px;
-   font-weight: bold;
-   display: block;
-   width: 130px;
-   padding: 30px 30px;
-}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
 
 $(document).ready(function(){
+
    let teamLeaderSeq = document.getElementById("teamLeaderSeq").value;
    let userSeq = document.getElementById("userSeq").value;
    let OGstart = document.getElementById("startDate").value;
@@ -329,6 +327,25 @@ $(document).ready(function(){
        }
     });
 });
+
+function submit1(frm){
+	let projectFinishYn = '${process.projectFinishYn}';
+	
+	if(projectFinishYn == 'Y'){
+		alert('이미 프로젝트 완료 처리 되었습니다');
+		return false;
+	} else{
+		let message = confirm('프로젝트를 완료 처리 하시겠습니까 ?');
+	    
+	    if(message){
+	       frm.action="/asc/process/projectFinish";
+	       frm.method="GET";
+	       frm.submit();
+	    } else{
+	       return false;
+	    }
+	}
+}
 </script>
 </head>
 <body>
@@ -428,12 +445,12 @@ $(document).ready(function(){
          </c:choose>
 </table>
 <c:if test="${project.finishYn ne 'S'}">
-   <input type="button" value="중단" style="margin-top: 25px;margin-left: 5px;" id="btnStop" class="btnClick">
+   <input type="button" value="중단" style="margin-top: 8px;margin-left: 5px;" id="btnStop" class="btnClick">
 </c:if>
 </form>
 </div>
-<form action="" method="">
-   <input type="button" value="완료" class="processBtn">
+<form action="#" method="GET">
+   <input type="button" value="완료" class="processBtn" onclick="submit1(this.form);">
 </form>
 </body>
 
