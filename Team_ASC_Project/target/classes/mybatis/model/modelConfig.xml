@@ -19,5 +19,6 @@
 		<typeAlias type="com.project.asc.vo.WbsDetailVO"  alias="wbsDetailVO" />
 		<typeAlias type="com.project.asc.vo.TestVO"  alias="testVO" />
 		<typeAlias type="com.project.asc.vo.MinutesVO"  alias="minutesVO" />
+		<typeAlias type="com.project.asc.vo.ProcessVO"  alias="processVO" />
 	</typeAliases>
 </configuration>
